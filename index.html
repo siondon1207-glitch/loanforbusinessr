@@ -1,23 +1,750 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --secondary: #06b6d4;
+      --secondary-hover: #0891b2;
+      --neutral-light: #f8fafc;
+      --neutral-card: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: #cbd5e1;
+      --accent-soft: #fef3c7;
+      --accent-border: #f59e0b;
+      --success-soft: #dcfce7;
+      --success-border: #22c55e;
+    }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.7;
+      color: var(--text-main);
+      background-color: var(--neutral-light);
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+      color: #ffffff;
+      padding: 60px 20px;
+      text-align: center;
+      border-bottom: 5px solid var(--primary);
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+      letter-spacing: -0.05em;
+    }
+
+    header p {
+      font-size: 1.15rem;
+      max-width: 800px;
+      margin: 0 auto 25px auto;
+      color: #cbd5e1;
+    }
+
+    nav {
+      background-color: var(--neutral-card);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 10px 0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 8px 16px;
+      transition: all 0.2s ease-in-out;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+      background-color: #f1f5f9;
+      border-radius: 4px;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    section {
+      background-color: var(--neutral-card);
+      padding: 40px;
+      margin-bottom: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      border: 1px solid #f1f5f9;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      color: #1e1b4b;
+      border-left: 5px solid var(--primary);
+      padding-left: 15px;
+      margin-top: 0;
+      margin-bottom: 25px;
+      font-weight: 700;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      color: #1e293b;
+      margin-top: 25px;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: var(--text-muted);
+      text-align: justify;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 25px;
+    }
+
+    .info-card {
+      border: 1px solid var(--border-color);
+      padding: 25px;
+      border-radius: 8px;
+      background-color: #ffffff;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .info-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(79, 70, 229, 0.1);
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: var(--primary);
+      color: #ffffff;
+      padding: 14px 30px;
+      border-radius: 6px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+      text-align: center;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .cta-button:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .accent-block {
+      background-color: var(--accent-soft);
+      border-left: 4px solid var(--accent-border);
+      padding: 20px;
+      border-radius: 4px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .accent-block p {
+      color: #78350f;
+      margin-bottom: 0;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      margin-top: 25px;
+      margin-bottom: 25px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      background-color: #f1f5f9;
+      color: #1e293b;
+      font-weight: 700;
+    }
+
+    tr:hover {
+      background-color: #fafbfd;
+    }
+
+    /* Calculator Styling */
+    .calculator-wrapper {
+      background-color: #f1f5f9;
+      padding: 30px;
+      border-radius: 8px;
+      margin-top: 25px;
+    }
+
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .calc-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #334155;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-size: 1rem;
+      background-color: #ffffff;
+      box-sizing: border-box;
+    }
+
+    .calc-button {
+      background-color: var(--secondary);
+      color: #ffffff;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 4px;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      font-size: 1.05rem;
+      transition: background-color 0.2s ease;
+    }
+
+    .calc-button:hover {
+      background-color: var(--secondary-hover);
+    }
+
+    .calc-result-box {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      margin-top: 20px;
+    }
+
+    .calc-result-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .calc-result-value {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #1e1b4b;
+    }
+
+    /* Consultation Form */
+    .consult-form {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-size: 1rem;
+      height: 100px;
+      box-sizing: border-box;
+      resize: vertical;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      margin-top: 15px;
+    }
+
+    .checkbox-group input {
+      margin-right: 10px;
+      margin-top: 4px;
+    }
+
+    .checkbox-group label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* FAQ accordion */
+    .faq-item {
+      border-bottom: 1px solid var(--border-color);
+      padding: 15px 0;
+    }
+
+    .faq-question {
+      font-weight: 700;
+      color: #1e293b;
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 5px 0;
+    }
+
+    .faq-answer {
+      color: var(--text-muted);
+      margin-top: 10px;
+      padding-left: 10px;
+      border-left: 2px solid var(--primary);
+    }
+
+    footer {
+      background-color: #0f172a;
+      color: #94a3b8;
+      padding: 50px 20px;
+      text-align: center;
+      border-top: 1px solid #1e293b;
+    }
+
+    footer p {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    footer a {
+      color: #cbd5e1;
+      text-decoration: underline;
+    }
+
+    footer a:hover {
+      color: #ffffff;
+    }
+
+    .footer-links {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+  </style>
+
+  <!-- JSON-LD Schema for FinancialProduct -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialProduct",
+    "name": "2026년 개인 및 법인 사업자대출한도 비교 서비스",
+    "alternateName": "개인사업자 대출한도 계산 가이드",
+    "description": "2026년 기준 신용 점수, 연 매출액, 부채 현황 분석을 통해 최적의 개인 및 법인 사업자대출한도와 이자율 비용을 비교 계산해 드립니다.",
+    "url": "https://loan.reliabledone.com/business-loan-limit",
+    "provider": {
+      "@type": "FinancialService",
+      "name": "종합 비대면 사업자 금융 솔루션",
+      "url": "https://loan.reliabledone.com"
+    },
+    "feesAndCommissionsSpecification": "https://loan.reliabledone.com/fees",
+    "interestRate": {
+      "@type": "QuantitativeValue",
+      "minValue": 3.5,
+      "maxValue": 14.8,
+      "unitText": "ANNUAL_PERCENTAGE_RATE"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "KRW",
+      "description": "실시간 한도 계산 및 비대면 금리 컨설팅 전액 무료 지원"
+    }
+  }
+  </script>
+</head>
+<body>
+
+<header>
+  <h1>2026년 맞춤형 사업자대출한도 산출 및 최적 금리 계산 분석</h1>
+  <p>개인사업자 및 법인기업의 경영 안정과 성장을 돕는 한도 조회 프로세스를 공개합니다. 복잡한 서류 검토 없이 현재 매출액과 신용 점수에 근거한 가예상 결과를 바로 확인하세요.</p>
+  <a href="#상담신청" class="cta-button">실시간 한도 맞춤 상담 신청</a>
+</header>
+
+<nav>
+  <div class="nav-container">
+    <a href="#시장동향">2026 시장동향</a>
+    <a href="#지역별정보">전국 지역별 분석</a>
+    <a href="#한도산출">대출한도 산출기준</a>
+    <a href="#실시간계산">비용 계산기</a>
+    <a href="#커뮤니티분석">소비자 동향</a>
+    <a href="#상담신청">비대면 컨설팅 신청</a>
+    <a href="#자주묻는질문">자주 묻는 질문</a>
+  </div>
+</nav>
+
+<main>
+  <!-- Section 1 -->
+  <section id="시장동향">
+    <h2>2026년 거시경제 변화와 사업자대출 시장 트렌드</h2>
+    <p>
+      2026년에 들어서며 한국 경제는 고금리 기조의 완화 국면에 접어들었으나 여전히 기업 금융 시장의 심사 기준은 한층 더 고도화되고 꼼꼼해졌습니다. 소상공인과 중소기업 경영자들 사이에서 사업자대출한도는 자금 흐름을 원활히 유지하는 데에 직결되는 생존 지표와 같습니다. 특히 금융 당국의 기업 대출 규제 스탠스가 실적 및 매출 건전성 중심으로 개편되면서 자금 마련에 앞서 철저한 준비가 수반되어야 합니다.
+    </p>
+    <p>
+      최근 비대면 온라인 시스템이 급속도로 활성화되면서 은행 방문이 번거로운 소상공인을 타깃으로 한 다이렉트 자금 조달 상품의 가입률이 눈에 띄게 상승하고 있습니다. 과거에는 주로 오프라인 대리점이나 전문 브랜드를 방문하여 견적과 한도를 산정받는 방식이었으나 이제는 인터넷 웹사이트와 모바일 앱 및 어플을 활용하여 실시간으로 예상 금액을 비교할 수 있는 환경이 조성되었습니다.
+    </p>
+    <p>
+      이러한 기술적 변화 속에서 자영업자가 스스로에게 맞는 가장 합리적인 금리대를 찾고, 제일 한도가 높게 산정되는 금융사를 골라내는 능력이 경쟁력이 되었습니다. 인터넷 전문 은행 및 고도화된 핀테크 플랫폼은 소액 신규 창업 자금부터 시작해 대형 담보 자금까지 다양한 스펙트럼의 신규 금융 기회를 매칭하고 있습니다.
+    </p>
+  </section>
+
+  <!-- Section 2 -->
+  <section id="지역별정보">
+    <h2>전국 30개 주요 지역별 소상공인 사업자대출한도 지원금 특징</h2>
+    <p>
+      전국 각 지역마다 지방자치단체와 지역신용보증재단이 연계하여 제공하는 특별 출연 협약 대출의 예상 한도와 금리에는 차이가 있습니다. 예를 들어, 서울특별시의 경우 영세 소상공인을 위한 서울형 특별 보증 지원책을 통해 평균적으로 유리한 한도와 낮은 우대 금리를 제공하고 있으며, 경기도 내 주요 도시인 수원, 성남, 고양, 용인, 부천, 안산, 남양주, 안양, 화성, 평택, 의정부, 파주, 시흥, 김포 등지에서는 경기신용보증재단과 연계한 매칭 자금 지원 사업이 활발히 운영 중입니다. 각 시군별로 자체 이자 지원 혜택이 상이하므로, 실제 가입 전 예상 금액과 비용을 철저히 계산해 볼 필요가 있습니다.
+    </p>
+    <p>
+      남부권의 대표적인 대도시인 부산광역시와 대구광역시, 인천광역시, 대전광역시, 광주광역시, 울산광역시, 그리고 신행정수도인 세종특별자치시 역시 각 지역 경제 활성화를 위한 특화 금융 상품을 출시하여 운영하고 있으며, 소상공인들의 실질적인 금융 비용 부담을 낮추는 다이렉트 지원 사업을 확대하고 있습니다. 이외에도 강원도(춘천, 원주, 강릉), 충청북도(청주), 충청남도(천안, 아산), 전라북도(전주, 군산), 전라남도(여수, 순천, 목포), 경상북도(포항, 경주시, 구미시), 경상남도(창원, 김해, 양산) 및 제주도 특별자치도에 이르기까지 전국 30개 이상의 핵심 권역에서 개별 신용 등급 및 매출 규모에 기초하여 맞춤형 자금 매칭 컨설팅이 이루어집니다.
+    </p>
+    
+    <div class="accent-block">
+      <p>
+        지방 자치단체의 이차보전 사업(이자 차액 보전 지원금)을 이용할 경우 시중 1금융권 은행 금리에서 1%에서 최고 3% 수준의 금리 할인을 제공받을 수 있어 실질적인 금융 이자 비용 절감에 상당한 장점을 나타냅니다. 단, 각 예산이 한정되어 있어 조기에 소진되는 단점이 있으므로 공고일 기준 빠른 신청과 정밀한 견적 파악이 성공의 지름길입니다.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3 -->
+  <section id="한도산출">
+    <h2>사업자대출한도 산출의 핵심 요소 및 종류별 차이점</h2>
+    <p>
+      은행 및 보증 기관에서 사업자대출한도를 계산할 때 가장 눈여겨보는 요소는 바로 연 매출액 대비 부채 비율과 대표자의 개인 신용 평가 점수입니다. 매출을 증빙할 수 있는 세금계산서, 신용카드 매출 전표 등의 정량적인 원천 서류를 기반으로 평균적 대출 가능 최대 금액이 결정됩니다.
+    </p>
+    <p>
+      여기에 더해 부채의 종류(기존 담보대출, 신용자금, 고금리 2금융권 채무 등)와 과거 연체 이력이 한도 감액의 주요 변수로 작동합니다. 제1금융권 브랜드 은행은 심사가 가장 까다로운 대신 가격적인 메리트가 제일 크며, 캐피탈 및 저축은행 등 제2금융권은 승인 허들이 낮고 빠른 다이렉트 심사가 장점이지만 월 상환 이율이 높다는 단점을 가집니다.
+    </p>
+    
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>구분 및 대출 상품 종류</th>
+            <th>평균 금리 범위 (2026년 기준)</th>
+            <th>예상 가능한 평균 한도</th>
+            <th>주요 장점 및 혜택</th>
+            <th>주요 단점 및 제한 사항</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>정부 정책자금 (신보/기보/중진공)</td>
+            <td>연 3.2% ~ 4.5%</td>
+            <td>최대 10억 원 이상 (업종별 차등)</td>
+            <td>이자율이 제일 저렴하며 상환 기간이 김</td>
+            <td>제출 서류가 무척 방대하고 심사 기간이 김</td>
+          </tr>
+          <tr>
+            <td>제1금융권 시중은행 (신용 대출)</td>
+            <td>연 4.3% ~ 6.5%</td>
+            <td>연간 총 매출액의 30% ~ 50% 수준</td>
+            <td>신속한 비대면 온라인 신청 및 진행</td>
+            <td>신용점수가 우수해야 하며 DSR 규제 영향 있음</td>
+          </tr>
+          <tr>
+            <td>제2금융권 캐피탈/저축은행</td>
+            <td>연 7.5% ~ 14.8%</td>
+            <td>매출액의 최대 80% 또는 담보 가치 비례</td>
+            <td>한도 우대 확률이 높고 승인율이 뛰어남</td>
+            <td>금리대가 높아서 매월 상환 비용 부담 가중</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 4 -->
+  <section id="실시간계산">
+    <h2>실시간 사업자대출한도 및 연간 비용 모의 계산기</h2>
+    <p>
+      복잡한 공식 대신 본인의 기초 사업 정보를 대입하여 예상되는 한도 범위와 대략적인 금융 이자 비용을 사전에 예측해 볼 수 있는 간편 모의 계산기입니다. 입력된 정보는 서버에 저장되지 않으며 온전히 개인적인 참고용으로만 활용 가능합니다.
+    </p>
+    
+    <div class="calculator-wrapper">
+      <div class="calc-grid">
+        <div class="form-group">
+          <label for="calc-biz-type">사업자 운영 유형</label>
+          <select id="calc-biz-type">
+            <option value="individual">개인사업자</option>
+            <option value="corporate">법인사업자</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="calc-revenue">최근 연간 총 매출액 (억원 단위)</label>
+          <input type="number" id="calc-revenue" placeholder="예: 3" min="0" step="0.1">
+        </div>
+        <div class="form-group">
+          <label for="calc-debt">현재 타사 대출 잔액 총액 (만원 단위)</label>
+          <input type="number" id="calc-debt" placeholder="예: 5000" min="0">
+        </div>
+        <div class="form-group">
+          <label for="calc-score">NICE / KCB 신용 점수</label>
+          <input type="number" id="calc-score" placeholder="예: 850 (300 ~ 1000 사이 입력)" min="300" max="1000">
+        </div>
+      </div>
+      <button class="calc-button" onclick="calculateLoanLimit()">예상 대출 한도 및 이율 즉시 계산하기</button>
+      
+      <div id="calc-result" class="calc-result-box" style="display: none;">
+        <div class="calc-result-title">모의 계산 가이용 한도 및 이율 분석서</div>
+        <div class="calc-result-value" id="limit-val">예상 한도: - 만원</div>
+        <div class="calc-result-value" id="rate-val" style="font-size: 1.15rem; margin-top: 5px; color: var(--text-muted);">적용 예상 금리: 연 - %</div>
+        <div class="calc-result-value" id="cost-val" style="font-size: 1.15rem; margin-top: 5px; color: #b91c1c;">연간 예상 이자 비용: 약 - 만원</div>
+        <p style="font-size: 0.8rem; margin-top: 15px; color: #64748b;">
+          본 예측 결과는 입력하신 신용 등급 및 매출 자가 진단을 기초로 환산한 간이 견적이며 실제 은행 연동 심사 결과와는 매출 검증 상태 및 자본금 상황에 따라 변동될 수 있습니다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5 -->
+  <section id="커뮤니티분석">
+    <h2>소비자 동향 및 온라인 커뮤니티 내돈내산 가입 후기 트렌드</h2>
+    <p>
+      디시인사이드(디시), 보배드림, 에펨코리아(펨코/에펨코리아) 등 소상공인과 중장년층 자영업자가 다수 포진한 주요 대형 온라인 커뮤니티에서는 실제 다양한 대출 실행 내돈내산 후기들이 공유되고 있습니다. 사용자들은 금리가 제일 저렴한곳을 찾아 발품을 파는 것보다 먼저 정부에서 보증하는 자금 종류들을 우선 확인하라는 팁을 적극 추천하고 있습니다.
+    </p>
+    <p>
+      특히 금융 중개 플랫폼을 사칭하여 저렴한곳이나 금리가 가장 싼곳이라고 허위 과장 광고를 한 뒤, 별도의 불법 수수료를 챙기거나 사은품 지급, 상품권 증정, 백화점 상품권 제공 및 무제한 현금지원금 지급 약속 등을 미끼 삼아 개인 정보를 빼내는 피싱 사이트나 사기 업체의 피해 사례가 빈번하게 공유되니 주의가 요망됩니다.
+    </p>
+    <p>
+      신뢰할 수 있는 가이드를 구하고 검증된 전문가와 상담 및 컨설팅을 거치며 안전하게 자금을 조달하는 것이 현명합니다. 공식 채널을 통한 문의만을 신뢰하고, 의심스러운 온라인 소셜 미디어(유튜브, 트위터, 인스타그램, 페이스북 등)의 현금지원 광고나 카카오톡 개인 채팅을 통한 불법적인 불법 영업 행위에는 절대 응하지 말아야 합니다.
+    </p>
+  </section>
+
+  <!-- Section 6 -->
+  <section id="기술과금융">
+    <h2>현대 금융 기술(AI)의 융합과 간편한 한도 조회 혁신</h2>
+    <p>
+      최근 토스, 네이버 페이, 카카오 페이 등 대형 금융 테크 기업들은 챗지피티(ChatGPT), 제미나이(Gemini) 등 첨단 인공지능(AI) 신경망 모델과 자체 정량 데이터베이스를 융합하여 단 수 분 만에 사업자대출한도를 정밀 분석해 주는 솔루션을 고안했습니다. 사용자는 구글이나 네이버에서 실시간 한도 계산 프로세스를 쉽게 확인하고 몇 번의 정보 입력만으로 수십 개의 금융 브랜드 상품 순위를 한눈에 비교할 수 있습니다.
+    </p>
+    <p>
+      이처럼 다변화된 핀테크 어플은 과거 오프라인 대면 창구에서 마주해야 했던 무거운 부담감과 대기 시간을 획기적으로 낮추어 주었습니다. 2026년 기업 금융의 메가 트렌드는 결국 모바일 다이렉트 자금 실행이며, 사용자는 실시간 알고리즘을 통한 혜택 극대화에 주안점을 두고 자금 조달 전략을 수립하여야 장기적 재무 불확실성을 피할 수 있습니다.
+    </p>
+  </section>
+
+  <!-- Section 7 -->
+  <section id="상담신청">
+    <h2>2026년 전문 사업자대출한도 정밀 대환 및 자금 상담 신청</h2>
+    <div class="consult-form">
+      <p>
+        신용보증재단, 시중은행 등 나에게 가장 유리한 최적의 자금 한도와 저렴한 비용 솔루션을 모색하고 계신가요? 간편 신청 폼을 남겨주시면 정식 등록된 전문 컨설턴트가 신속하게 맞춤형 정보 및 우대 금리 분석을 안내해 드립니다.
+      </p>
+      <form onsubmit="handleSubmitForm(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="consult-name">기업명 또는 대표자명</label>
+            <input type="text" id="consult-name" placeholder="대표자 성함을 입력해주세요" required>
+          </div>
+          <div class="form-group">
+            <label for="consult-tel">대표 연락처 (휴대폰)</label>
+            <input type="tel" id="consult-tel" placeholder="010-1234-5678" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="consult-region">사업장 소재 지역 선택</label>
+            <select id="consult-region">
+              <option value="seoul">서울특별시</option>
+              <option value="gyeonggi">경기도</option>
+              <option value="incheon">인천광역시</option>
+              <option value="busan">부산광역시</option>
+              <option value="daegu">대구광역시</option>
+              <option value="daejeon">대전광역시</option>
+              <option value="gwangju">광주광역시</option>
+              <option value="ulsan">울산광역시</option>
+              <option value="sejong">세종특별자치시</option>
+              <option value="gangwon">강원도</option>
+              <option value="chungbuk">충청북도</option>
+              <option value="chungnam">충청남도</option>
+              <option value="jeonbuk">전라북도</option>
+              <option value="jeonnam">전라남도</option>
+              <option value="gyeongbuk">경상북도</option>
+              <option value="gyeongnam">경상남도</option>
+              <option value="jeju">제주도</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="consult-amount">필요 자금 규모 (만원 단위)</label>
+            <input type="number" id="consult-amount" placeholder="예: 5000" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="consult-message">기타 문의 내용 또는 희망 상담 시간</label>
+          <textarea id="consult-message" placeholder="현재 영위 중이신 업종이나 기대하시는 대출 목적을 기술해주시면 더욱 상세한 맞춤 견적 조회가 가능합니다."></textarea>
+        </div>
+        
+        <div class="checkbox-group">
+          <input type="checkbox" id="consult-agree" required>
+          <label for="consult-agree">
+            개인정보 수집 및 이용 동의(필수): 입력하신 신원 정보는 2026년도 사업자대출한도 비교 검토 및 무료 상담 안내를 위해서만 활용되며 관련 법령에 의거하여 철저히 보안 유지 및 사후 즉시 파기됩니다.
+          </label>
+        </div>
+        
+        <button type="submit" class="cta-button" style="width: 100%; margin-top: 20px;">무료 비대면 포괄적 분석 피드백 신청하기</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Section 8 -->
+  <section id="자주묻는질문">
+    <h2>자주 묻는 질문 (FAQ)</h2>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">Q1. 개인사업자대출은 가계 대출 DSR 규제를 그대로 받나요?</div>
+      <div class="faq-answer">
+        기본적으로 사업 영위를 목적으로 취급되는 기업 운전자금 및 시설자금 대출은 가계 대출 총액 DSR 규제 산정 범주에서 제외되는 특징을 가집니다. 다만 대표자의 개인 신용 한도를 활용한 가계 신용대출 성격의 자금은 가계 대출 규제를 온전히 적용받으므로 실행 전 상품 종류를 정교히 규정해야 합니다.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">Q2. 신규 개업하여 매출 기록이 아직 적은데 대출한도가 책정될 수 있나요?</div>
+      <div class="faq-answer">
+        네, 창업 1년 미만의 초기 신규 가입 사업자의 경우 매출 증빙 대신 신용보증기금이나 지역신용보증재단의 청년창업 특례보증, 스타트업 보증 자금을 통해 대표자 개인 신용과 구체적인 사업계획서에 기반하여 최적의 평균 한도를 조달하는 방식이 활발히 활용되고 있습니다.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">Q3. 불법 사금융 광고나 수수료 피해를 방지하는 제일 명확한 방법은 무엇인가요?</div>
+      <div class="faq-answer">
+        정식 등록된 합법 금융사 및 모집인은 어떠한 명목으로도 고객에게 별도의 수수료나 진행 보수, 선이자를 요구하지 않습니다. 가입 혜택으로 현금지원금이나 상품권, 이벤트성 과대 경품을 먼저 제안하는 업체는 불법 금융 브로커일 개연성이 매우 짙으므로 금융소비자 정보포털을 통한 조회 후 정상 기업에 의뢰하는 프로세스를 권장합니다.
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  function calculateLoanLimit() {
+    const bizType = document.getElementById('calc-biz-type').value;
+    const revenue = parseFloat(document.getElementById('calc-revenue').value);
+    const debt = parseFloat(document.getElementById('calc-debt').value) || 0;
+    const score = parseInt(document.getElementById('calc-score').value);
+
+    const resultBox = document.getElementById('calc-result');
+
+    if (isNaN(revenue) || revenue <= 0 || isNaN(score) || score < 300 || score > 1000) {
+      alert("매출액과 올바른 범위의 신용점수를 입력해 주십시오.");
+      return;
+    }
+
+    // Basic Logic (Theoretical model for simulation)
+    let multiplier = bizType === 'corporate' ? 0.5 : 0.35;
+    let baseLimit = (revenue * 10000) * multiplier; // in 만원 units
+
+    // Credit score weighting factor
+    let scoreFactor = 1.0;
+    let estimatedRate = 5.5;
+
+    if (score >= 900) {
+      scoreFactor = 1.3;
+      estimatedRate = 4.2;
+    } else if (score >= 800) {
+      scoreFactor = 1.1;
+      estimatedRate = 4.9;
+    } else if (score >= 700) {
+      scoreFactor = 0.9;
+      estimatedRate = 6.2;
+    } else if (score >= 600) {
+      scoreFactor = 0.6;
+      estimatedRate = 8.5;
+    } else {
+      scoreFactor = 0.25;
+      estimatedRate = 12.8;
+    }
+
+    let calculatedLimit = (baseLimit * scoreFactor) - (debt * 0.3);
+
+    if (calculatedLimit < 1000) {
+      calculatedLimit = 1000; // minimum guarantee
+    }
+
+    // Format output
+    const finalLimitAmount = Math.round(calculatedLimit);
+    const finalLimitStr = finalLimitAmount >= 10000 
+      ? (finalLimitAmount / 10000).toFixed(1) + "억 원" 
+      : finalLimitAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "만 원";
+
+    const annualInterestCost = Math.round((finalLimitAmount * (estimatedRate / 100)));
+    const annualInterestStr = annualInterestCost >= 10000 
+      ? (annualInterestCost / 10000).toFixed(1) + "억 원" 
+      : annualInterestCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "만 원";
+
+    document.getElementById('limit-val').innerText = "예상 한도: " + finalLimitStr;
+    document.getElementById('rate-val').innerText = "적용 예상 금리: 평균 연 " + estimatedRate.toFixed(2) + "%";
+    document.getElementById('cost-val').innerText = "연간 예상 이자 비용: 약 " + annualInterestStr;
+
+    resultBox.style.display = 'block';
+  }
+
+  function toggleFaq(element) {
+    const answer = element.nextElementSibling;
+    if (answer.style.display === "none" || answer.style.display === "") {
+      answer.style.display = "block";
+    } else {
+      answer.style.display = "none";
+    }
+  }
+
+  function handleSubmitForm(event) {
+    event.preventDefault();
+    const name = document.getElementById('consult-name').value;
+    const tel = document.getElementById('consult-tel').value;
+    const amount = document.getElementById('consult-amount').value;
+
+    if (name && tel && amount) {
+      alert(name + " 대표님, 성공적으로 맞춤 상담 분석이 접수되었습니다. 영업시간 기준 빠른 검토 전화를 전달해 드리겠습니다.");
+    }
+  }
+</script>
+
+  
